@@ -1,0 +1,170 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+.main {
+    display: flex;
+    align-items: center; 
+    height: 100vh;
+    width: 100vw;
+    background-size: cover;
+    background-position: center;
+}
+
+.authform {
+    max-width: 450px;
+    width: 100%; 
+    padding: 30px;
+    margin-left: 40px;
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    margin-right: 180px;
+}
+
+
+
+.text__image {
+    max-width: 450px; 
+    width: 100%; 
+    padding: 30px; 
+    margin-left: 40px; 
+    margin-top: 40px; 
+    display: flex; 
+    flex-direction: column; 
+    margin-right: 180px; 
+    align-items: center;
+}
+
+div.text__image img {
+    width: 100% !important; 
+    height: auto !important; 
+    object-fit: contain; 
+}
+
+
+.input__container {
+    margin-bottom: 25px; 
+    border-bottom: #ccc;
+    margin: 20px; 
+}
+
+input {
+    margin-top: 50px;
+    width: 372px;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin-top: 10px;
+}
+
+button {
+    width: 372px;
+    height: 50px;
+    padding: 12px;
+    margin-top: 15px;
+    background-color: #4182F9;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #3169c5;
+}
+
+.bottom__container {
+    margin-top: auto; 
+    padding-top: 40px;
+    margin-bottom: 60px;
+}
+
+.top__container {
+    margin-bottom: auto; 
+    padding-bottom: 40px;
+}
+
+.bottom__container h2 {
+    margin-top: 60px;
+}
+
+h1, h2 {
+    margin-bottom: 20px; 
+}
+
+h2 {
+    margin-top: 200px;
+}
+
+h1 {
+    font-weight: bolder;
+}
+
+@media (max-width: 1200px) {
+    .authform {
+        margin: 40px 100px;
+        max-width: 500px;
+        min-width: 300px;
+    }
+
+    .text__image img {
+        max-height: 70vh;
+        min-height: 300px;
+    }
+}
+
+@media (max-width: 992px) {
+    .authform {
+        margin: 20px;
+        max-width: 450px;
+        min-width: 280px;
+        display: block;
+    }
+
+    .text__image {
+        flex: 1;
+    }
+
+    .text__image img {
+        max-height: 60vh;
+        min-height: 200px;
+    }
+
+    h2 {
+        margin-top: 150px;
+    }
+}
+
+@media (max-width: 768px) {
+    .authform {
+        margin: 20px;
+        padding: 20px;
+        max-width: 90%;
+        min-width: 260px;
+    }
+
+    h2 {
+        margin-top: 50px;
+    }
+}
+
+@media (max-width: 480px) {
+    .authform {
+        padding: 10px;
+        max-width: 100%;
+        min-width: 250px;
+    }
+
+    input, button {
+        max-width: 100%;
+        min-width: 200px;
+    }
+
+    button {
+        height: 40px;
+    }
+}

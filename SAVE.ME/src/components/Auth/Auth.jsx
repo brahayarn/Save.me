@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
 import { signUp, logIn, logOut } from '../../firebase/services/authService';
-import styles from './Main.css';
+import styles from './Auth.css';
 import textImage from '../../assets/images/textpg.png';
 import backimg from '../../assets/images/backimg.svg';
 
@@ -13,6 +13,7 @@ const Main = () => {
     const [error, setError] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
     const navigate = useNavigate();
+
 
     const handleSignUp = async (e) => {
         e.preventDefault();
@@ -41,7 +42,7 @@ const Main = () => {
             setError('');
             setEmail('');
             setPassword('');
-            navigate('/home', { state: { user } });
+            navigate('/profile', { state: { user } });
         } catch (err) {
             setError(err.message);
             setSuccessMessage('');
@@ -83,9 +84,10 @@ const Main = () => {
                                 required
                             />
                         </div>
-                        <button onClick={handleSignUp} className={styles.button}>
-                            Зареєструватися
-                        </button>
+                            <button onClick={handleSignUp} className={styles.button}>
+                                Зареєструватися
+                            </button>
+
                     </div>
 
                     <div className={styles.bottom__container}>
@@ -97,9 +99,11 @@ const Main = () => {
                 </form>
             </div>
 
-            <div className={styles.text__image}>
-                <img src={textImage} alt="text-image" />
-            </div>
+                <div className={styles.text__image}>
+                    <img src={textImage} alt="text-image" />
+                </div>
+
+        
         </div>
     );
 };
