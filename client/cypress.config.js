@@ -19,10 +19,9 @@ module.exports = defineConfig({
             return config;
         },
     },
-    
+
     e2e: {
-        setupNodeEvents() {
-            // on, config не використовуємо ці зміні в цій функції тому виникає помилка eslint
+        setupNodeEvents(on, config) {
             // implement node event listeners here
         },
     },

@@ -8,21 +8,20 @@
     "build": "webpack build -c config/webpack.production.config.js",
     "build:dev": "webpack build -c config/webpack.development.config.js",
     "start:dev": "webpack serve -c config/webpack.development.config.js",
+    "lint": "eslint --ignore-path .gitignore --ext .js,.jsx --max-warnings 0 ./src",
+    "lint:fix": "eslint --ignore-path .gitignore --fix --ext .js,.jsx --max-warnings 0 ./src",
     "test": "echo \"Error: no test specified\" && exit 1",
     "test:open": "cypress open",
     "test:ct": "cypress run --component --browser chrome",
-    "prepare": "husky",
-    "lint": "eslint --ignore-path .gitignore --ext .js,.jsx --max-warnings 0 ./src",
-    "lint:fix": "eslint --ignore-path .gitignore --fix --ext .js,.jsx --max-warnings 0 ./src"
+    "prepare": "husky"
   },
   "keywords": [
     "React",
     "eslint"
   ],
-  "author": "hrabar-yana",
+  "author": "romanbuchuk",
   "license": "ISC",
   "dependencies": {
-    "firebase": "^10.14.1",
     "react": "18.3.1",
     "react-dom": "18.3.1",
     "react-router-dom": "6.26.2"
@@ -36,10 +35,12 @@
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.15",
     "babel-loader": "^9.2.1",
     "babel-plugin-istanbul": "^7.0.0",
+    "copy-webpack-plugin": "^12.0.2",
     "css-loader": "^7.1.2",
     "cypress": "^13.14.2",
     "eslint": "^8.57.1",
     "husky": "^9.1.6",
+    "styled-components": "6.1.13",
     "eslint-config-prettier": "^9.1.0",
     "eslint-import-resolver-webpack": "^0.13.9",
     "eslint-plugin-cypress": "^3.5.0",

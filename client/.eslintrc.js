@@ -1,64 +1,66 @@
-module.exports = {
+// https://eslint.org/docs/v8.x/
+
+const config = {
     env: {
-      browser: true,
-      node: true,
-      es2021: true,
+        browser: true,
+        node: true,
+        es2021: true,
     },
     extends: [
-      'eslint:recommended',
-      'plugin:react/recommended',
-      'plugin:react-hooks/recommended',
-      'plugin:import/errors',
-      'plugin:import/warnings',
-      'plugin:unicorn/recommended',
-      'plugin:cypress/recommended',
+        'eslint:recommended',
+        /* https://www.npmjs.com/package/eslint-plugin-react */
+        'plugin:react/recommended',
+        /* https://www.npmjs.com/package/eslint-plugin-react-hooks */
+        'plugin:react-hooks/recommended',
+        /*https://www.npmjs.com/package/eslint-plugin-import*/
+        'plugin:import/errors',
+        'plugin:import/warnings',
+        /*https://www.npmjs.com/package/eslint-plugin-unicorn*/
+        'plugin:unicorn/recommended',
+        /*https://www.npmjs.com/package/eslint-plugin-cypress*/
+        'plugin:cypress/recommended',
     ],
+    /* https://github.com/import-js/eslint-plugin-import */
     settings: {
-      'import/resolver': {
-        node: {
-          extensions: ['.js', '.jsx'],
+        'import/resolver': {
+            node: {
+                extensions: ['.js', '.jsx'],
+            },
+            webpack: {
+                config: './config/webpack.dev.config.js',
+            },
         },
-        webpack: {
-          config: './config/webpack.dev.config.js',
-        },
-      },
-      'import/ignore': [
-    'node_modules', 
-    '**/*.js',
-    '**/*.jsx',
-  ],
     },
     plugins: ['simple-import-sort', 'react'],
     ignorePatterns: ['node_modules'],
     rules: {
-      'unicorn/filename-case': [
-        'error',
-        {
-          cases: {
-            camelCase: true,
-            pascalCase: true,
-          },
-        },
-      ],
-      'simple-import-sort/exports': 'error',
-      'simple-import-sort/imports': 'error',
-    //   'import/namespace': [2, { allowComputed: true }],
-      'import/first': 'error',
-      'import/newline-after-import': 'error',
-      'no-const-assign': 'error', 
-      'prefer-const': 'error' 
+        'unicorn/filename-case': [
+            'error',
+            {
+                cases: {
+                    camelCase: true,
+                    pascalCase: true,
+                },
+            },
+        ],
+        'simple-import-sort/exports': 'error',
+        'simple-import-sort/imports': 'error',
+        'import/namespace': [2, { allowComputed: true }],
+        'import/first': 'error',
+        'import/newline-after-import': 'error',
     },
     overrides: [
-      {
-        files: ['*rc.js', '*.config.js'],
-        rules: {
-          'unicorn/prefer-module': 'off',
-          'unicorn/filename-case': 'off',
+        {
+            files: ['*rc.js', '*.config.js'],
+            rules: {
+                'unicorn/prefer-module': 'off',
+                'unicorn/filename-case': 'off',
+            },
         },
-      },
     ],
     globals: {
-      Cypress: true,
+        Cypress: true,
     },
-  };
-  
+};
+
+module.exports = config;
