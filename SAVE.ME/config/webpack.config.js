@@ -1,8 +1,4 @@
 const path = require('node:path'); // Node.js path module 
-//https://github.com/sindresorhus/eslint-plugin-unicorn/blob/v55.0.0/docs/rules/prefer-node-protocol.md
-// When importing builtin modules, it's better to use the node: protocol as it makes it perfectly clear 
-//that the package is a Node.js builtin module.
-//Note that Node.js support for this feature began in: v16.0.0, 
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 
 const basicConfig = {
@@ -27,13 +23,27 @@ const basicConfig = {
             }
           }
         ],
-      }
-    ]
+      },
+      {
+        test: /\.(png|jpg|jpeg|gif|svg)$/i,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[name].[hash:8].[ext]', 
+              outputPath: 'images',        
+            },
+          },
+        ],
+      },
+    ],
   },
+  
   resolve: {
-    extensions: ['.js', '.jsx'],
+    extensions: ['.js', '.jsx', '.css', '.svg'],
     alias: {
       '@hooks': path.resolve(__dirname, '../src/hooks'),
+      '@assets': path.resolve(__dirname, '../src/assets/'),
     }
   },
   devServer: {
