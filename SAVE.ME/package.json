@@ -4,28 +4,30 @@
   "description": "My pet project",
   "main": "index.js",
   "scripts": {
-    "start": "echo \"Please provide entry file\" && exit 1",
+    "start": "echo \"App has been started\" && exit 1",
+    "start:dev": "webpack serve -c config/webpack.development.config.js",
     "build": "webpack build -c config/webpack.production.config.js",
     "build:dev": "webpack build -c config/webpack.development.config.js",
-    "start:dev": "webpack serve -c config/webpack.development.config.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "test:open": "cypress open",
+    "prepare": "husky",
     "test:ct": "cypress run --component --browser chrome",
-    "prepare": "husky"
+    "test:open": "cypress open",
+    "precommit": "husky run -c .husky/pre-commit",
+    "lint": "eslint **/*.{js,jsx} --ignore-pattern 'node_modules/' --ignore-pattern 'dist/'"
+  }, 
+  "lint-staged": {
+    "*.{js,jsx}": [
+      "eslint --ignore-path .gitignore --fix --max-warnings 0",
+      "prettier --write"
+    ]
   },
-  "keywords": [
-    "React",
-    "eslint"
-  ],
   "author": "hrabar-yana",
   "license": "ISC",
   "dependencies": {
     "firebase": "^10.14.1",
-    "husky": "^9.1.6",
     "react": "18.3.1",
     "react-dom": "18.3.1",
-    "react-router-dom": "6.26.2",
-    "styled-components": "6.1.13"
+    "react-router-dom": "6.26.2"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
@@ -39,6 +41,7 @@
     "css-loader": "^7.1.2",
     "cypress": "^13.14.2",
     "eslint": "^8.57.1",
+    "husky": "^9.1.6",
     "eslint-config-prettier": "^9.1.0",
     "eslint-import-resolver-webpack": "^0.13.9",
     "eslint-plugin-cypress": "^3.5.0",
