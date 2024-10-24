@@ -5,17 +5,13 @@ import ProfileCard from '../../components/ProfileCard/ProfileCard';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import styles from './Profile.css';
 
-
-
 const Profile = () => {
   return (
-    <div className={styles.profileContainer}>
-      <Header />
-      <div className={styles.profileMain}>
-        <Sidebar />
-        <div className={styles.profileContent}>
-          <ProfileCard />
-        </div>
+    <div className={styles.mainContainer}>
+      <Sidebar />
+      <div className={styles.mainContent}>
+        <Header />      
+        <ProfileCard />
       </div>
     </div>
   );

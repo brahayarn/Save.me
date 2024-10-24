@@ -29,9 +29,9 @@
 .chat-sidebar-menu > li {
     margin: 10px 0;
     position: relative; 
-}
+} 
 
-.chat-sidebar-menu > li > a {
+ .chat-sidebar-menu > li > a {
     display: block;
     text-align: center;
     padding: 12px 8px;

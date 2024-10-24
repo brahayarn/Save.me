@@ -1,12 +1,12 @@
 import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 
-import Sidebar from './components/Sidebar/Sidebar';
+import Profile from './pages/Profile/Profile';
 
 const App = () => {
     return (
         <Router>
-            <Sidebar />
+            <Profile />
         </Router>
     );
 };
