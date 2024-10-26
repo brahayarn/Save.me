@@ -1,8 +1,9 @@
 import avatar from '@assets/icons/header/avatar.svg';
 import mailbox from '@assets/icons/header/mailbox.svg';
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-import styles from './ProfileCard.css'; 
+import styles from './ProfileCard.css';
 
 function ProfileCard() {
     return (
@@ -42,19 +43,22 @@ function ProfileCard() {
                             <textarea
                                 placeholder="your added tags.."
                                 className={`${styles.inputField} ${styles.tagscont}`}
-                                rows={4} 
+                                rows={4}
                             />
                         </div>
                     </div>
                 </div>
 
                 <div className={styles.usermaillog}>
-                <img src={mailbox} alt="Mail Box" className={styles.mailimg} />
                     <div className={styles.formRow}>
-                <span className={styles.label}>My email Address</span>
-                    <p>alexarawles@gmail.com</p>
+                        <span className={styles.label}>My email Address</span>
+                        <img src={mailbox} alt="Mail Box" className={styles.mailimg} />
+                        <p>alexarawles@gmail.com</p>
                     </div>
-                    <button className={styles.logoutButton}>Logout</button>
+
+                    <Link to="/" data-title="Settings">
+                        <button className={styles.logoutButton}>Logout</button>
+                    </Link>
                 </div>
             </div>
         </div>
