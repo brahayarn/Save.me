@@ -25,7 +25,7 @@ module.exports = {
                 config: './config/webpack.development.config.js',
             },
         },
-        'import/ignore': ['node_modules', '**/*.js', '**/*.jsx'],
+        'import/ignore': ['node_modules'],
     },
     plugins: ['simple-import-sort', 'react'],
     ignorePatterns: ['node_modules'],
