@@ -1,9 +1,15 @@
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth';
 
 import { auth } from '../firebaseConfig';
-import { validatePassword } from './passwordValidation';
+import { validateGmail } from './validation/gmailValidation';
+import { validatePassword } from './validation/passwordValidation';
 
 export const signUp = async (email, password) => {
+    const emailError = validateGmail(email);
+    if (emailError) {
+        throw new Error(emailError);
+    }
+
     const passwordError = validatePassword(password);
     if (passwordError) {
         throw new Error(passwordError);
@@ -13,6 +19,11 @@ export const signUp = async (email, password) => {
 };
 
 export const logIn = async (email, password) => {
+    const emailError = validateGmail(email);
+    if (emailError) {
+        throw new Error(emailError);
+    }
+
     const passwordError = validatePassword(password);
     if (passwordError) {
         throw new Error(passwordError);
