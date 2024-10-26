@@ -9,8 +9,8 @@ const Header = () => {
     return (
         <header className={styles.profileheader}>
             <div className={styles.headerleft}>
-                <h1>Welcome, Amanda</h1>
-                <p>Tue, 07 June 2022</p>
+                <h1>Welcome, User</h1>
+                <p>today time</p>
             </div>
             <div className={styles.headerright}>
                 <div className={styles.searchsection}>

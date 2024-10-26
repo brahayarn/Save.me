@@ -229,3 +229,12 @@ dist
 /.idea/git_toolbox_prj.xml
 /.idea/project_c2_remote.iml
 /.idea/vcs.xml
+
+# Ignore all CSS files
+*.css
+
+# But do not ignore CSS files in specific folders
+!/src/components/**/*.css
+!/src/pages/**/*.css
+
+git add -f src/**/*.css

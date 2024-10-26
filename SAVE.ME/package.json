@@ -13,14 +13,10 @@
     "test:ct": "cypress run --component --browser chrome",
     "test:open": "cypress open",
     "precommit": "husky run -c .husky/pre-commit",
-    "lint": "eslint **/*.{js,jsx} --ignore-pattern 'node_modules/' --ignore-pattern 'dist/'"
-  }, 
-  "lint-staged": {
-    "*.{js,jsx}": [
-      "eslint --ignore-path .gitignore --fix --max-warnings 0",
-      "prettier --write"
-    ]
-  },
+    "lint": "eslint --ext .js,.jsx --max-warnings 0 ./src",
+    "lint:fix": "eslint --fix --ext .js,.jsx src",
+    "lint-staged": "lint-staged --config D:\\Projects\\Save.me\\SAVE.ME\\SAVE.ME\\lint-staged.config.js"
+},
   "author": "hrabar-yana",
   "license": "ISC",
   "dependencies": {

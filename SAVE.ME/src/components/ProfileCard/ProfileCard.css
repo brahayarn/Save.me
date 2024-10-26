@@ -15,14 +15,13 @@
     box-sizing: border-box;
 }
 
-
 .userInfo {
     display: flex;
     align-items: center;
 }
 
 .userImage {
-    width: 100px; 
+    width: 100px;
     height: 100px;
     border-radius: 50%;
     background-color: #ffffff;
@@ -44,72 +43,67 @@ h2 {
 }
 
 .profileForm {
-    display: flex; 
-    justify-content: space-between; 
-    margin-top: 20px; 
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
 }
 
 .column {
-    flex: 1; 
-    margin-right: 20px; 
+    flex: 1;
+    margin-right: 20px;
 }
 
 .column:last-child {
-    margin-right: 0; 
+    margin-right: 0;
 }
 
 .formRow {
     display: flex;
-    flex-direction: column; 
+    flex-direction: column;
     margin-bottom: 20px;
 }
 
 .label {
-    margin-bottom: 5px; 
-    font-weight: bold; 
-    color: #555; 
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
 }
 
 .inputField,
 .tagscont {
-    width: 100%; 
-    padding: 12px; 
+    width: 100%;
+    padding: 12px;
     border-radius: 5px;
-    border: 1px solid #ccc; 
-    font-size: 16px; 
+    border: 1px solid #ccc;
+    font-size: 16px;
 }
 
 .tagscont {
     width: 100%;
-    padding: 14px 12px; 
-    border-radius: 5px; 
-    border: 1px solid #ccc; 
-    font-size: 16px; 
-    height: 100px; 
-    resize: none; 
-    box-sizing: border-box; 
+    padding: 14px 12px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    height: 100px;
+    resize: none;
+    box-sizing: border-box;
 }
 
 .tagscont::placeholder {
-    color: #aaa; 
-
+    color: #aaa;
 }
 .inputField {
-    width: 100%; 
-    padding: 12px; 
+    width: 100%;
+    padding: 12px;
     font-size: 14px;
     border: none;
-    border-radius: 4px; 
-    outline: none; 
-    background-color: #F9F9F9; 
-    box-sizing: border-box; 
+    border-radius: 4px;
+    outline: none;
+    background-color: #f9f9f9;
+    box-sizing: border-box;
 }
 
-
-
-
-
-.mailimg{
+.mailimg {
     width: 20px;
     height: 20px;
     margin-right: 10px;
@@ -124,30 +118,13 @@ h2 {
     border-radius: 5px;
     cursor: pointer;
 }
-.usermaillog{
+.usermaillog {
     display: flex;
     align-items: center;
     margin-top: 150px;
 }
-.formrowal{
+.formrowal {
     display: flex;
     justify-content: space-between;
     margin-bottom: 20px;
-}
-
-
-
-@media (max-width: 768px) {
-    .profileCard {
-        padding: 20px;
-    }
-
-    .formRow {
-        flex-direction: column;
-    }
-
-    .formRow input, .formRow select {
-        width: 100%;
-        margin-bottom: 15px;
-    }
 }

@@ -1,12 +1,12 @@
 import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 
-import Profile from './pages/Profile/Profile';
+import Group from './pages/Group/Group';
 
 const App = () => {
     return (
         <Router>
-            <Profile />
+            <Group />
         </Router>
     );
 };

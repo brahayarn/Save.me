@@ -1,0 +1,259 @@
+/* Global Chat Container */
+.chatContainer {
+    display: flex;
+    height: 84.5vh;
+    font-family: 'Arial', sans-serif;
+    justify-content: space-between;
+}
+
+/* Left Sidebar */
+.sidebar {
+    width: 20%;
+    background-color: #c8dafc;
+    padding-left: 15px;
+    padding-right: 10px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.searchsection {
+    display: flex;
+    align-items: center;
+    border: none;
+    border-radius: 20px;
+    padding: 5px;
+    background-color: #fff;
+    margin-right: 5px;
+    margin-bottom: 10px;
+}
+
+.searchsection img {
+    margin-right: 8px;
+}
+
+.searchsection input {
+    padding: 5px 10px;
+    font-size: 14px;
+    border: none;
+    border-radius: 4px;
+    outline: none;
+    width: 100px;
+    background-color: #fff;
+}
+
+.contacts {
+    flex-grow: 1;
+    overflow-y: auto;
+    background-color: #ffffff;
+    border-radius: 10px;
+}
+.contacts::-webkit-scrollbar {
+    width: 7px;
+    height: 7px;
+}
+
+.contacts::-webkit-scrollbar-track {
+    background: #ffffff;
+    border-radius: 10px;
+}
+
+.contacts::-webkit-scrollbar-thumb {
+    background-color: #1d75dd;
+    border-radius: 10px;
+    border: 2px solid #c8dafc;
+}
+
+.contacts::-webkit-scrollbar-thumb:hover {
+    background-color: #0a5bb5;
+}
+
+.contact {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    margin-bottom: 2px;
+    background-color: #ffffff;
+    border-bottom: 2px solid #e0efff;
+}
+
+.contact.selected {
+    background-color: #1d75dd;
+}
+
+.userInfo {
+    display: flex;
+    align-items: center;
+}
+.userInfo img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+/* Chat Area */
+.chatArea {
+    width: 53%;
+    height: 84.5vh;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    margin-right: 20px;
+}
+
+.chatHeader {
+    padding: 15px;
+    background-color: #f0f4ff;
+}
+
+.chatHeader h3 {
+    margin: 0;
+    font-size: 18px;
+}
+
+.chatHeader p {
+    margin: 5px 0 0;
+    color: gray;
+    font-size: 14px;
+}
+
+.messages {
+    flex-grow: 1;
+    padding: 15px;
+    overflow-y: auto;
+}
+.messages::-webkit-scrollbar {
+    width: 7px;
+    height: 7px;
+}
+
+.messages::-webkit-scrollbar-track {
+    background: #ffffff;
+    border-radius: 10px;
+}
+
+.messages::-webkit-scrollbar-thumb {
+    background-color: #1d75dd;
+    border-radius: 10px;
+    border: 2px solid #c8dafc;
+}
+
+.messages::-webkit-scrollbar-thumb:hover {
+    background-color: #0a5bb5;
+}
+
+.message {
+    background-color: #f0f4ff;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    max-width: 60%;
+}
+
+.message.outgoing {
+    background-color: #aedbff;
+    margin-left: auto;
+}
+
+.message p {
+    margin: 0;
+}
+
+.message span {
+    font-size: 12px;
+    color: gray;
+    display: block;
+    margin-top: 5px;
+}
+
+.messageInput {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 5px;
+    display: flex;
+    border-top: 1px solid #dcdcdc;
+}
+
+.messageInput input {
+    padding: 5px 10px;
+    font-size: 14px;
+    border: none;
+    border-radius: 4px;
+    outline: none;
+    width: 100%;
+    background-color: #fff;
+}
+
+.messageInput button {
+    margin-left: 10px;
+    padding: 10px 20px;
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+/* Profile Info */
+.profile {
+    width: 25%;
+    height: 84.5vh;
+    background-color: #f0f4ff;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 10px;
+}
+
+.profile img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+h3,
+p {
+    margin: 10px 0;
+}
+
+.status {
+    color: #ff5252;
+    font-size: 14px;
+}
+
+.blockBtn {
+    margin-top: auto;
+    padding: 10px;
+    background-color: #ff5252;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+.profiletags {
+    width: 100%;
+    height: 84.5vh;
+    background-color: #c8dafc;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 10px;
+}
+
+.deleteblock {
+    padding-top: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.deleteblock img {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin-right: 100px;
+}
