@@ -1,12 +1,12 @@
 import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 
-import Group from './pages/Group/Group';
+import Auth from './pages/Auth/Auth';
 
 const App = () => {
     return (
         <Router>
-            <Group />
+            <Auth />
         </Router>
     );
 };
