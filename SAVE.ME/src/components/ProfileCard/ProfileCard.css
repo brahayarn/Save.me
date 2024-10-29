@@ -8,11 +8,12 @@
 
 .profileCard {
     background-color: white;
-    padding: 40px;
+    padding: 20px;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
     width: 100%;
     box-sizing: border-box;
+    height: 85vh;
 }
 
 .userInfo {
@@ -121,7 +122,8 @@ h2 {
 .usermaillog {
     display: flex;
     align-items: center;
-    margin-top: 150px;
+    margin-top: 140px;
+    justify-content: space-between;
 }
 .formrowal {
     display: flex;

@@ -1,6 +1,7 @@
 import avatar from '@assets/icons/header/avatar.svg';
 import mailbox from '@assets/icons/header/mailbox.svg';
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import styles from './ProfileCard.css';
 
@@ -54,7 +55,10 @@ function ProfileCard() {
                         <span className={styles.label}>My email Address</span>
                         <p>alexarawles@gmail.com</p>
                     </div>
-                    <button className={styles.logoutButton}>Logout</button>
+
+                    <Link to="/" data-title="Settings">
+                        <button className={styles.logoutButton}>Logout</button>
+                    </Link>
                 </div>
             </div>
         </div>

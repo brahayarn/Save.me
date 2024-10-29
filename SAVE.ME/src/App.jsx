@@ -1,12 +1,12 @@
 import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 
-import NotFound from './pages/NotFound/NotFound';
+import Auth from './pages/Auth/Auth';
 
 const App = () => {
     return (
         <Router>
-            <NotFound />
+            <Auth />
         </Router>
     );
 };
