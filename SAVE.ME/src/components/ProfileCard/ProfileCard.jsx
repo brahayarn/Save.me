@@ -50,9 +50,9 @@ function ProfileCard() {
                 </div>
 
                 <div className={styles.usermaillog}>
+                    <img src={mailbox} alt="Mail Box" className={styles.mailimg} />
                     <div className={styles.formRow}>
                         <span className={styles.label}>My email Address</span>
-                        <img src={mailbox} alt="Mail Box" className={styles.mailimg} />
                         <p>alexarawles@gmail.com</p>
                     </div>
 

@@ -6,15 +6,15 @@ import Sidebar from '../../components/Sidebar/Sidebar';
 import styles from './Profile.css';
 
 const Profile = () => {
-  return (
-    <div className={styles.mainContainer}>
-      <Sidebar />
-      <div className={styles.mainContent}>
-        <Header />      
-        <ProfileCard />
-      </div>
-    </div>
-  );
+    return (
+        <div className={styles.mainContainer}>
+            <Sidebar />
+            <div className={styles.mainContent}>
+                <Header />
+                <ProfileCard />
+            </div>
+        </div>
+    );
 };
 
 export default Profile;

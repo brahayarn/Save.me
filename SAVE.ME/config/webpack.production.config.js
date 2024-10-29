@@ -1,9 +1,9 @@
-const { merge } = require("webpack-merge");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const basicConfig = require("./webpack.config");
+const { merge } = require('webpack-merge');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const basicConfig = require('./webpack.config');
 
 const config = {
-    mode: "production",
+    mode: 'production',
     plugins: [new MiniCssExtractPlugin()],
     module: {
         rules: [
@@ -12,7 +12,7 @@ const config = {
                 use: [
                     MiniCssExtractPlugin.loader,
                     {
-                        loader: "css-loader",
+                        loader: 'css-loader',
                         options: {
                             modules: {
                                 mode: 'local',
@@ -20,8 +20,9 @@ const config = {
                                 // namedExport: true, case 1;
                                 namedExport: false,
                             },
-                        }
-                    },],
+                        },
+                    },
+                ],
             },
         ],
     },
