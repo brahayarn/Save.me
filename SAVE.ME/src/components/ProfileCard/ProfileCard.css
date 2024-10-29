@@ -1,0 +1,130 @@
+.profileContent {
+    padding-left: 15px;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.profileCard {
+    background-color: white;
+    padding: 40px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.userInfo {
+    display: flex;
+    align-items: center;
+}
+
+.userImage {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: #ffffff;
+}
+
+h2 {
+    margin-left: 20px;
+    font-size: 24px;
+}
+
+.editButton {
+    margin-left: auto;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.profileForm {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.column {
+    flex: 1;
+    margin-right: 20px;
+}
+
+.column:last-child {
+    margin-right: 0;
+}
+
+.formRow {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.label {
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+}
+
+.inputField,
+.tagscont {
+    width: 100%;
+    padding: 12px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+.tagscont {
+    width: 100%;
+    padding: 14px 12px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    height: 100px;
+    resize: none;
+    box-sizing: border-box;
+}
+
+.tagscont::placeholder {
+    color: #aaa;
+}
+.inputField {
+    width: 100%;
+    padding: 12px;
+    font-size: 14px;
+    border: none;
+    border-radius: 4px;
+    outline: none;
+    background-color: #f9f9f9;
+    box-sizing: border-box;
+}
+
+.mailimg {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+}
+
+.logoutButton {
+    background-color: #ff4d4d;
+    margin-left: auto;
+    padding: 10px 20px;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.usermaillog {
+    display: flex;
+    align-items: center;
+    margin-top: 150px;
+}
+.formrowal {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
