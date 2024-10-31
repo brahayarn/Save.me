@@ -1,8 +1,8 @@
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth';
 
 import { auth } from '../config';
-import { validateGmail } from '../validation/gmailValidation';
-import { validatePassword } from '../validation/passwordValidation';
+import { validateGmail } from './validation/gmailValidation';
+import { validatePassword } from './validation/passwordValidation';
 
 export const signUp = async (email, password) => {
     const emailError = validateGmail(email);
