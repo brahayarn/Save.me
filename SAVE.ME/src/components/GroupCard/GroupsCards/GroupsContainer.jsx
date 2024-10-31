@@ -1,55 +1,17 @@
 import avatar from '@assets/icons/header/avatar.svg';
-import { collection, doc, getDoc, getDocs } from 'firebase/firestore';
+import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 
-import { auth, database } from '../../../firebase/config';
 import styles from '../../PeopleCard/PeopleCards/PeopleContainer.css';
 
-const PeopleContainer = () => {
-    const [groups, setGroups] = useState([]);
-    const [currentUserTags, setCurrentUserTags] = useState([]);
+const GroupsContainer = ({ groups, userTags }) => {
     const [filteredGroups, setFilteredGroups] = useState([]);
-
-    const user = auth.currentUser;
-    const navigate = useNavigate();
-
-    const handleGetText = () => {
-        navigate('/chat');
-    };
-
-    useEffect(() => {
-        const fetchCurrentUserData = async () => {
-            if (user) {
-                const userProfileReference = doc(database, 'users', user.uid);
-                const userProfileSnap = await getDoc(userProfileReference);
-                if (userProfileSnap.exists()) {
-                    const data = userProfileSnap.data();
-                    setCurrentUserTags(data.tags || []);
-                }
-            }
-        };
-
-        const fetchGroups = async () => {
-            const groupsCollectionReference = collection(database, 'groups');
-            const groupsSnap = await getDocs(groupsCollectionReference);
-            const groupsList = groupsSnap.docs
-                .map((document_) => ({ id: document_.id, ...document_.data() }))
-                .filter((group) => !group.members || !group.members.includes(user?.uid));
-
-            console.log('Fetched groups:', groupsList);
-            setGroups(groupsList);
-        };
-
-        fetchCurrentUserData();
-        fetchGroups();
-    }, [user]);
 
     useEffect(() => {
         const updateFilteredGroups = groups.map((group) => {
             const groupTags = group.tags || [];
-            const matchingTags = groupTags.filter((tag) => currentUserTags.includes(tag));
-            const missingTags = groupTags.filter((tag) => !currentUserTags.includes(tag));
+            const matchingTags = groupTags.filter((tag) => userTags.includes(tag));
+            const missingTags = groupTags.filter((tag) => !userTags.includes(tag));
 
             return {
                 ...group,
@@ -57,10 +19,8 @@ const PeopleContainer = () => {
                 missingTags: missingTags,
             };
         });
-
         setFilteredGroups(updateFilteredGroups);
-        console.log('Filtered groups:', updateFilteredGroups);
-    }, [groups, currentUserTags]);
+    }, [groups, userTags]);
 
     return (
         <div className={styles.left}>
@@ -103,9 +63,6 @@ const PeopleContainer = () => {
                                     </div>
                                 </div>
                             </div>
-                            <button className={styles.getTextBtn} onClick={handleGetText}>
-                                get text
-                            </button>
                         </div>
                     ))
                 )}
@@ -113,5 +70,15 @@ const PeopleContainer = () => {
         </div>
     );
 };
+GroupsContainer.propTypes = {
+    groups: PropTypes.arrayOf(
+        PropTypes.shape({
+            id: PropTypes.string.isRequired,
+            name: PropTypes.string,
+            tags: PropTypes.arrayOf(PropTypes.string),
+        }),
+    ).isRequired,
+    userTags: PropTypes.arrayOf(PropTypes.string).isRequired,
+};
 
-export default PeopleContainer;
+export default GroupsContainer;

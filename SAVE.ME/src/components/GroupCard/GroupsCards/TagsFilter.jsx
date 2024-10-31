@@ -1,17 +1,13 @@
-// import avatar from '@assets/icons/header/avatar.svg';
-import left from '@assets/icons/pagination/left.svg';
-import right from '@assets/icons/pagination/right.svg';
-import { collection, doc, getDoc, getDocs, setDoc, updateDoc } from 'firebase/firestore';
-import React, { useCallback, useEffect, useState } from 'react';
+import { collection, doc, getDocs, updateDoc } from 'firebase/firestore';
+import PropTypes from 'prop-types';
+import React, { useEffect, useState } from 'react';
 
 import { auth, database } from '../../../firebase/config';
 import styles from '../../PeopleCard/TagsFilter/Tags.css';
 
-const TagSystem = () => {
+const GroupTagSystem = ({ userTags, setUserTags, fetchGroups }) => {
     const [tags, setTags] = useState([]);
-    const [userTags, setUserTags] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
-
     const userId = auth.currentUser?.uid;
 
     const fetchTags = async () => {
@@ -24,28 +20,9 @@ const TagSystem = () => {
         }
     };
 
-    const fetchUserTags = useCallback(async () => {
-        if (!userId) return;
-
-        try {
-            const userDocumentReference = doc(database, 'users', userId);
-            const userDocument = await getDoc(userDocumentReference);
-
-            if (userDocument.exists()) {
-                setUserTags(userDocument.data().tags || []);
-            } else {
-                await setDoc(userDocumentReference, { tags: [] });
-                setUserTags([]);
-            }
-        } catch (error) {
-            console.error('Error fetching user tags:', error);
-        }
-    }, [userId]);
-
     useEffect(() => {
         fetchTags();
-        fetchUserTags();
-    }, [userId, fetchUserTags]);
+    }, []);
 
     const handleAddTag = async (tagId) => {
         if (!userId) return;
@@ -66,7 +43,7 @@ const TagSystem = () => {
             await updateDoc(doc(database, 'users', userId), { tags: updatedUserTags });
             setUserTags(updatedUserTags);
 
-            fetchTags();
+            fetchGroups();
         } catch (error) {
             console.error('Error adding tag:', error);
         }
@@ -91,7 +68,7 @@ const TagSystem = () => {
             await updateDoc(doc(database, 'users', userId), { tags: updatedUserTags });
             setUserTags(updatedUserTags);
 
-            fetchTags();
+            fetchGroups();
         } catch (error) {
             console.error('Error removing tag:', error);
         }
@@ -130,16 +107,14 @@ const TagSystem = () => {
                         </div>
                     ))}
                 </div>
-                <div className={styles.pagination}>
-                    <img src={left} alt="left" />
-                    <div className={styles.pagecontainer}>
-                        <span className={styles.pageNumber}>2</span>
-                    </div>
-                    <img src={right} alt="right" />
-                </div>
             </div>
         </div>
     );
 };
+GroupTagSystem.propTypes = {
+    userTags: PropTypes.arrayOf(PropTypes.string).isRequired,
+    setUserTags: PropTypes.func.isRequired,
+    fetchGroups: PropTypes.func.isRequired,
+};
 
-export default TagSystem;
+export default GroupTagSystem;
