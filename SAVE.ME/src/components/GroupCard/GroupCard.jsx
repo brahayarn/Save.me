@@ -1,8 +1,8 @@
 import React from 'react';
 
-import TagSystem from '../PeopleCard/TagsFilter/TagsFilter';
-import styles from './GroupCard.css';
+import TagSystem from '../GroupCard/GroupsCards/TagsFilter';
 import GroupsContainer from './GroupsCards/GroupsContainer';
+import styles from './PeopleCard.css';
 
 const PeopleCard = () => {
     return (

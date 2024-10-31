@@ -38,6 +38,27 @@
     flex-grow: 1;
     border-radius: 10px;
     background-color: #e8f0fe;
+    overflow-y: auto; /* Enable vertical scrolling */
+}
+
+.alltag::-webkit-scrollbar {
+    width: 7px;
+    height: 7px;
+}
+
+.alltag::-webkit-scrollbar-track {
+    background: #ffffff;
+    border-radius: 10px;
+}
+
+.alltag::-webkit-scrollbar-thumb {
+    background-color: #1d75dd;
+    border-radius: 10px;
+    border: 2px solid #c8dafc;
+}
+
+.alltag::-webkit-scrollbar-thumb:hover {
+    background-color: #0a5bb5;
 }
 
 .usage {

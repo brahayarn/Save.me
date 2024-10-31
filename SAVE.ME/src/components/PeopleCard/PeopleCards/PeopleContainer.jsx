@@ -1,53 +1,35 @@
 import avatar from '@assets/icons/header/avatar.svg';
-import { collection, doc, getDoc, getDocs } from 'firebase/firestore';
+import { collection, getDocs } from 'firebase/firestore';
+import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 import { auth, database } from '../../../firebase/config';
 import styles from './PeopleContainer.css';
 
-const PeopleContainer = () => {
+const PeopleContainer = ({ userTags, filteredUsers, setFilteredUsers }) => {
     const [users, setUsers] = useState([]);
-    const [currentUserTags, setCurrentUserTags] = useState([]);
-    const [filteredUsers, setFilteredUsers] = useState([]);
-
     const user = auth.currentUser;
-    const navigate = useNavigate();
 
-    const handleGetText = () => {
-        navigate('/chat');
-    };
-
+    // Завантаження користувачів з Firestore
     useEffect(() => {
-        const fetchCurrentUserData = async () => {
-            if (user) {
-                const userProfileReference = doc(database, 'users', user.uid);
-                const userProfileSnap = await getDoc(userProfileReference);
-                if (userProfileSnap.exists()) {
-                    const data = userProfileSnap.data();
-                    setCurrentUserTags(data.tags || []);
-                }
-            }
-        };
-
         const fetchUsers = async () => {
             const usersCollectionReference = collection(database, 'users');
             const usersSnap = await getDocs(usersCollectionReference);
             const usersList = usersSnap.docs
                 .map((document_) => ({ id: document_.id, ...document_.data() }))
-                .filter((person) => person.id !== user?.uid);
+                .filter((person) => person.id !== user?.uid); // Виключити поточного користувача
             setUsers(usersList);
         };
 
-        fetchCurrentUserData();
         fetchUsers();
     }, [user]);
 
+    // Фільтрація користувачів на основі тегів
     useEffect(() => {
         const updateFilteredUsers = users.map((person) => {
-            const userTags = person.tags || [];
-            const matchingTags = userTags.filter((tag) => currentUserTags.includes(tag));
-            const missingTags = userTags.filter((tag) => !currentUserTags.includes(tag));
+            const personTags = person.tags || [];
+            const matchingTags = personTags.filter((tag) => userTags.includes(tag));
+            const missingTags = personTags.filter((tag) => !userTags.includes(tag));
 
             return {
                 ...person,
@@ -57,7 +39,7 @@ const PeopleContainer = () => {
         });
 
         setFilteredUsers(updateFilteredUsers);
-    }, [users, currentUserTags]);
+    }, [users, userTags, setFilteredUsers]);
 
     return (
         <div className={styles.left}>
@@ -101,15 +83,18 @@ const PeopleContainer = () => {
                                     </div>
                                 </div>
                             </div>
-                            <button className={styles.getTextBtn} onClick={handleGetText}>
-                                get text
-                            </button>
                         </div>
                     ))
                 )}
             </div>
         </div>
     );
+};
+
+PeopleContainer.propTypes = {
+    userTags: PropTypes.array.isRequired,
+    filteredUsers: PropTypes.array.isRequired,
+    setFilteredUsers: PropTypes.func.isRequired,
 };
 
 export default PeopleContainer;

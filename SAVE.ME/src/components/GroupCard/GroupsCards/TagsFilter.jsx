@@ -1,16 +1,17 @@
+// import avatar from '@assets/icons/header/avatar.svg';
+import left from '@assets/icons/pagination/left.svg';
+import right from '@assets/icons/pagination/right.svg';
 import { collection, doc, getDoc, getDocs, setDoc, updateDoc } from 'firebase/firestore';
-import PropTypes from 'prop-types';
 import React, { useCallback, useEffect, useState } from 'react';
 
-import { auth, database } from '../../firebase/config';
-import styles from './PeopleCard.css';
-import PeopleContainer from './PeopleCards/PeopleContainer';
-import TagSystem from './TagsFilter/TagsFilter';
+import { auth, database } from '../../../firebase/config';
+import styles from '../../PeopleCard/TagsFilter/Tags.css';
 
-const PeopleCard = () => {
+const TagSystem = () => {
     const [tags, setTags] = useState([]);
     const [userTags, setUserTags] = useState([]);
-    const [filteredUsers, setFilteredUsers] = useState([]);
+    const [searchTerm, setSearchTerm] = useState('');
+
     const userId = auth.currentUser?.uid;
 
     const fetchTags = async () => {
@@ -96,23 +97,49 @@ const PeopleCard = () => {
         }
     };
 
+    const filteredTags = tags
+        .filter((tag) => tag.name.toLowerCase().includes(searchTerm.toLowerCase()))
+        .sort((a, b) => b.usage - a.usage);
+
     return (
-        <div className={styles.peopleContainer}>
-            <PeopleContainer
-                tags={tags}
-                userTags={userTags}
-                setFilteredUsers={setFilteredUsers} // Передаємо функцію для оновлення
-                filteredUsers={filteredUsers} // Передаємо відфільтрованих користувачів
-            />
-            <TagSystem tags={tags} userTags={userTags} onAddTag={handleAddTag} onRemoveTag={handleRemoveTag} />
+        <div className={styles.right}>
+            <div className={styles.textcontainer}>
+                <p>Filter by tags</p>
+            </div>
+            <div className={styles.filterArea}>
+                <input
+                    type="text"
+                    placeholder="Search tags..."
+                    value={searchTerm}
+                    onChange={(event) => setSearchTerm(event.target.value)}
+                />
+                <div className={styles.alltag}>
+                    {filteredTags.map((tag) => (
+                        <div key={tag.id} className={styles.tag}>
+                            <span>#{tag.name}</span>
+                            <span className={styles.usage}>usage: {tag.usage || 0}</span>
+                            {userTags.includes(tag.name) ? (
+                                <button onClick={() => handleRemoveTag(tag.id)} className={styles.removeBtn}>
+                                    Remove
+                                </button>
+                            ) : (
+                                <button onClick={() => handleAddTag(tag.id)} className={styles.addBtn}>
+                                    Add
+                                </button>
+                            )}
+                        </div>
+                    ))}
+                </div>
+                <div className={styles.pagination}>
+                    <img src={left} alt="left" />
+                    <div className={styles.pagecontainer}>
+                        <span className={styles.pageNumber}>2</span>
+                    </div>
+                    <img src={right} alt="right" />
+                </div>
+            </div>
         </div>
     );
 };
 
-PeopleCard.propTypes = {
-    tags: PropTypes.array.isRequired,
-    userTags: PropTypes.array.isRequired,
-    setFilteredUsers: PropTypes.func.isRequired,
-};
-
-export default PeopleCard;
+export default TagSystem;
