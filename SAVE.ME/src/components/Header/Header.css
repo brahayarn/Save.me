@@ -1,7 +1,7 @@
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box; 
+    box-sizing: border-box;
 }
 
 .profileheader {
@@ -11,17 +11,17 @@
     background-color: #c8dafc;
     padding: 10px 20px;
 }
-  
+
 .headerleft h1 {
     font-size: 24px;
     margin: 0;
 }
-  
+
 .headerleft p {
     font-size: 14px;
     color: #7a7a7a;
 }
-  
+
 .headerright {
     display: flex;
     align-items: center;
@@ -30,7 +30,7 @@
 .searchsection {
     display: flex;
     align-items: center;
-    border: 1px solid #ccc; 
+    border: 1px solid #ccc;
     border-radius: 10px;
     padding: 5px;
     background-color: #fff;
@@ -38,7 +38,7 @@
 }
 
 .searchsection img {
-    margin-right: 8px; 
+    margin-right: 8px;
 }
 
 .searchsection input {
@@ -46,18 +46,17 @@
     font-size: 14px;
     border: none;
     border-radius: 4px;
-    outline: none; 
-    width: 200px; 
-    background-color: #fff; 
+    outline: none;
+    width: 200px;
+    background-color: #fff;
 }
-
 
 .mesinfo {
     width: 40px;
     height: 40px;
-    margin-left: 15px; 
-    border-radius: 10px; 
-    background-color: #fff; 
+    margin-left: 15px;
+    border-radius: 10px;
+    background-color: #fff;
 }
 .profilepic {
     width: 40px;
@@ -66,4 +65,3 @@
     margin-left: 15px;
     background-color: #fff;
 }
-
