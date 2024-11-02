@@ -1,16 +1,13 @@
-import { collection, doc, getDoc, getDocs, setDoc, updateDoc } from 'firebase/firestore';
+import { collection, doc, getDocs, updateDoc } from 'firebase/firestore';
 import PropTypes from 'prop-types';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
-import { auth, database } from '../../firebase/config';
-import styles from './PeopleCard.css';
-import PeopleContainer from './PeopleCards/PeopleContainer';
-import TagSystem from './TagsFilter/TagsFilter';
+import { auth, database } from '../../../firebase/config';
+import styles from '../../PeopleCard/TagsFilter/Tags.css';
 
-const PeopleCard = () => {
+const GroupTagSystem = ({ userTags, setUserTags, fetchGroups }) => {
     const [tags, setTags] = useState([]);
-    const [userTags, setUserTags] = useState([]);
-    const [filteredUsers, setFilteredUsers] = useState([]);
+    const [searchTerm, setSearchTerm] = useState('');
     const userId = auth.currentUser?.uid;
 
     const fetchTags = async () => {
@@ -23,28 +20,9 @@ const PeopleCard = () => {
         }
     };
 
-    const fetchUserTags = useCallback(async () => {
-        if (!userId) return;
-
-        try {
-            const userDocumentReference = doc(database, 'users', userId);
-            const userDocument = await getDoc(userDocumentReference);
-
-            if (userDocument.exists()) {
-                setUserTags(userDocument.data().tags || []);
-            } else {
-                await setDoc(userDocumentReference, { tags: [] });
-                setUserTags([]);
-            }
-        } catch (error) {
-            console.error('Error fetching user tags:', error);
-        }
-    }, [userId]);
-
     useEffect(() => {
         fetchTags();
-        fetchUserTags();
-    }, [userId, fetchUserTags]);
+    }, []);
 
     const handleAddTag = async (tagId) => {
         if (!userId) return;
@@ -65,7 +43,7 @@ const PeopleCard = () => {
             await updateDoc(doc(database, 'users', userId), { tags: updatedUserTags });
             setUserTags(updatedUserTags);
 
-            fetchTags();
+            fetchGroups();
         } catch (error) {
             console.error('Error adding tag:', error);
         }
@@ -90,29 +68,53 @@ const PeopleCard = () => {
             await updateDoc(doc(database, 'users', userId), { tags: updatedUserTags });
             setUserTags(updatedUserTags);
 
-            fetchTags();
+            fetchGroups();
         } catch (error) {
             console.error('Error removing tag:', error);
         }
     };
 
+    const filteredTags = tags
+        .filter((tag) => tag.name.toLowerCase().includes(searchTerm.toLowerCase()))
+        .sort((a, b) => b.usage - a.usage);
+
     return (
-        <div className={styles.peopleContainer}>
-            <PeopleContainer
-                tags={tags}
-                userTags={userTags}
-                setFilteredUsers={setFilteredUsers} // Передаємо функцію для оновлення
-                filteredUsers={filteredUsers} // Передаємо відфільтрованих користувачів
-            />
-            <TagSystem tags={tags} userTags={userTags} onAddTag={handleAddTag} onRemoveTag={handleRemoveTag} />
+        <div className={styles.right}>
+            <div className={styles.textcontainer}>
+                <p>Filter by tags</p>
+            </div>
+            <div className={styles.filterArea}>
+                <input
+                    type="text"
+                    placeholder="Search tags..."
+                    value={searchTerm}
+                    onChange={(event) => setSearchTerm(event.target.value)}
+                />
+                <div className={styles.alltag}>
+                    {filteredTags.map((tag) => (
+                        <div key={tag.id} className={styles.tag}>
+                            <span>#{tag.name}</span>
+                            <span className={styles.usage}>usage: {tag.usage || 0}</span>
+                            {userTags.includes(tag.name) ? (
+                                <button onClick={() => handleRemoveTag(tag.id)} className={styles.removeBtn}>
+                                    Remove
+                                </button>
+                            ) : (
+                                <button onClick={() => handleAddTag(tag.id)} className={styles.addBtn}>
+                                    Add
+                                </button>
+                            )}
+                        </div>
+                    ))}
+                </div>
+            </div>
         </div>
     );
 };
-
-PeopleCard.propTypes = {
-    tags: PropTypes.array.isRequired,
-    userTags: PropTypes.array.isRequired,
-    setFilteredUsers: PropTypes.func.isRequired,
+GroupTagSystem.propTypes = {
+    userTags: PropTypes.arrayOf(PropTypes.string).isRequired,
+    setUserTags: PropTypes.func.isRequired,
+    fetchGroups: PropTypes.func.isRequired,
 };
 
-export default PeopleCard;
+export default GroupTagSystem;

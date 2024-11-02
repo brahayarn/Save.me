@@ -1,12 +1,23 @@
 import React from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 import Auth from './pages/Auth/Auth';
+import Chat from './pages/Chat/Chat';
+import Groups from './pages/Group/Group';
+import Tags from './pages/People/People';
+import Profile from './pages/Profile/Profile';
 
 const App = () => {
     return (
         <Router>
-            <Auth />
+            <Routes>
+                <Route path="/" element={<Auth />} />
+                <Route path="/profile" element={<Profile />} />
+                <Route path="/chat" element={<Chat />} />
+                <Route path="/groups" element={<Groups />} />
+                <Route path="/tags" element={<Tags />} />
+                <Route path="/settings" element={<Profile />} />
+            </Routes>
         </Router>
     );
 };

@@ -5,6 +5,7 @@ import chatIcon from '@assets/icons/nonactive/messages.svg';
 import settingsIcon from '@assets/icons/nonactive/setting.svg';
 import tagsIcon from '@assets/icons/nonactive/tags.svg';
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import styles from './Sidebar.css';
 
@@ -13,34 +14,34 @@ const Sidebar = () => {
         <aside className={styles.chatSidebar}>
             <ul className={styles.chatSidebarMenu}>
                 <li>
-                    <a data-title="Burgerlist">
+                    <Link data-title="Burgerlist">
                         <img src={burgerIcon} alt="Burger Icon" className={styles.logoImage} />
-                    </a>
+                    </Link>
                 </li>
-                <li className={styles.active}>
-                    <a data-title="Chats">
+                <li>
+                    <Link to="/chat" data-title="Chats">
                         <img src={chatIcon} alt="Chats Icon" className={styles.logoImage} />
-                    </a>
+                    </Link>
                 </li>
                 <li>
-                    <a data-title="Tags">
+                    <Link to="/tags" data-title="Tags">
                         <img src={tagsIcon} alt="Tags Icon" className={styles.logoImage} />
-                    </a>
+                    </Link>
                 </li>
                 <li>
-                    <a data-title="Groups">
+                    <Link to="/groups" data-title="Groups">
                         <img src={groupsIcon} alt="Groups Icon" className={styles.logoImage} />
-                    </a>
+                    </Link>
                 </li>
                 <li>
-                    <a data-title="Light">
+                    <Link data-title="Light">
                         <img src={lightIcon} alt="Light Icon" className={styles.logoImage} />
-                    </a>
+                    </Link>
                 </li>
                 <li>
-                    <a data-title="Settings">
+                    <Link to="/settings" data-title="Settings">
                         <img src={settingsIcon} alt="Settings Icon" className={styles.logoImage} />
-                    </a>
+                    </Link>
                 </li>
             </ul>
         </aside>
