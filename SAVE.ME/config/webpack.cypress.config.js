@@ -14,7 +14,7 @@ const config = {
                         options: {
                             modules: {
                                 mode: 'local',
-                                localIdentName: `[name]_[local]--[hash:base64:5]`,
+                                localIdentName: '[name]_[local]--[hash:base64:5]',
                                 namedExport: false,
                             },
                         },

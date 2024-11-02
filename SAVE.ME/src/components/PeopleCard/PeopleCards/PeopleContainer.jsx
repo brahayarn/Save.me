@@ -6,7 +6,8 @@ import React, { useEffect, useState } from 'react';
 import { auth, database } from '../../../firebase/config';
 import styles from './PeopleContainer.css';
 
-const PeopleContainer = ({ userTags, filteredUsers, setFilteredUsers }) => {
+const PeopleContainer = ({ userTags, filteredUsers = [], setFilteredUsers }) => {
+    // Default to empty array
     const [users, setUsers] = useState([]);
     const user = auth.currentUser;
 
@@ -50,41 +51,46 @@ const PeopleContainer = ({ userTags, filteredUsers, setFilteredUsers }) => {
                 {filteredUsers.length === 0 ? (
                     <p>No users found</p>
                 ) : (
-                    filteredUsers.map((person) => (
-                        <div key={person.id} className={styles.person}>
-                            <div className={styles.personInfo}>
-                                <img src={avatar} alt="avatar" className={styles.avatar} />
-                                <div className={styles.userInfo}>
-                                    <h3>{person.nickname || 'User'}</h3>
-                                    <p>{person.status || 'No status available'}</p>
-                                    <div className={styles.tags}>
-                                        <div className={styles.userTags}>
-                                            {person.userTags.length > 0 ? (
-                                                person.userTags.map((tag) => (
-                                                    <span key={tag} className={styles.blueTag}>
-                                                        {tag}
-                                                    </span>
-                                                ))
-                                            ) : (
-                                                <span>No matching tags</span>
-                                            )}
-                                        </div>
-                                        <div className={styles.missingTags}>
-                                            {person.missingTags.length > 0 ? (
-                                                person.missingTags.map((tag) => (
-                                                    <span key={tag} className={styles.grayTag}>
-                                                        {tag}
-                                                    </span>
-                                                ))
-                                            ) : (
-                                                <span>No missing tags</span>
-                                            )}
+                    filteredUsers.map((person) => {
+                        // Extract tags based on your data structure
+                        const userTags = person.tags || []; // Use the correct field for tags
+                        const missingTags = userTags.filter((tag) => !userTags.includes(tag)); // Determine missing tags
+
+                        return (
+                            <div key={person.id} className={styles.person}>
+                                <div className={styles.personInfo}>
+                                    <img src={avatar} alt="avatar" className={styles.avatar} />
+                                    <div className={styles.userInfo}>
+                                        <h3>{person.nickname || 'User'}</h3>
+                                        <div className={styles.tags}>
+                                            <div className={styles.userTags}>
+                                                {userTags.length > 0 ? (
+                                                    userTags.map((tag) => (
+                                                        <span key={tag} className={styles.blueTag}>
+                                                            {tag}
+                                                        </span>
+                                                    ))
+                                                ) : (
+                                                    <span>No matching tags</span>
+                                                )}
+                                            </div>
+                                            <div className={styles.missingTags}>
+                                                {missingTags.length > 0 ? (
+                                                    missingTags.map((tag) => (
+                                                        <span key={tag} className={styles.grayTag}>
+                                                            {tag}
+                                                        </span>
+                                                    ))
+                                                ) : (
+                                                    <span>No missing tags</span>
+                                                )}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    ))
+                        );
+                    })
                 )}
             </div>
         </div>
@@ -93,7 +99,7 @@ const PeopleContainer = ({ userTags, filteredUsers, setFilteredUsers }) => {
 
 PeopleContainer.propTypes = {
     userTags: PropTypes.array.isRequired,
-    filteredUsers: PropTypes.array.isRequired,
+    filteredUsers: PropTypes.array,
     setFilteredUsers: PropTypes.func.isRequired,
 };
 

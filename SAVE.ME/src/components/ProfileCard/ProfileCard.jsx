@@ -135,7 +135,7 @@ const ProfileCard = () => {
             <div className={styles.profileCard}>
                 <div className={styles.userInfo}>
                     <img src={avatar} alt="User Avatar" className={styles.userImage} />
-                    <h2>{profileData.nickname || user.displayName || 'User'}</h2>
+                    <h2>{profileData.nickname || 'User'}</h2>
                     <button onClick={handleEditToggle} className={styles.editButton}>
                         {isEditing ? 'Save' : 'Edit'}
                     </button>

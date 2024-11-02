@@ -18,8 +18,10 @@ module.exports = defineConfig({
 
             return config;
         },
+        viewportWidth: 1366,
+        viewportHeight: 768,
     },
-    
+
     e2e: {
         setupNodeEvents() {
             // on, config не використовуємо ці зміні в цій функції тому виникає помилка eslint

@@ -3,10 +3,10 @@ import React, { useState } from 'react';
 
 import styles from './Tags.css';
 
-const TagSystem = ({ tags, userTags, onAddTag, onRemoveTag }) => {
+const TagSystem = ({ tags = [], userTags, onAddTag, onRemoveTag }) => {
     const [searchTerm, setSearchTerm] = useState('');
 
-    const filteredTags = tags
+    const filteredTags = (tags || [])
         .filter((tag) => tag.name.toLowerCase().includes(searchTerm.toLowerCase()))
         .sort((a, b) => b.usage - a.usage);
 
