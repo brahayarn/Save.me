@@ -90,17 +90,25 @@ const GroupTagSystem = ({ userTags, setUserTags, fetchGroups }) => {
                     value={searchTerm}
                     onChange={(event) => setSearchTerm(event.target.value)}
                 />
-                <div className={styles.alltag}>
+                <div data-testid="alltag" className={styles.alltag}>
                     {filteredTags.map((tag) => (
-                        <div key={tag.id} className={styles.tag}>
+                        <div key={tag.id} data-testid="tag" className={styles.tag}>
                             <span>#{tag.name}</span>
                             <span className={styles.usage}>usage: {tag.usage || 0}</span>
                             {userTags.includes(tag.name) ? (
-                                <button onClick={() => handleRemoveTag(tag.id)} className={styles.removeBtn}>
+                                <button
+                                    onClick={() => handleRemoveTag(tag.id)}
+                                    data-testid="removeBtn"
+                                    className={styles.removeBtn}
+                                >
                                     Remove
                                 </button>
                             ) : (
-                                <button onClick={() => handleAddTag(tag.id)} className={styles.addBtn}>
+                                <button
+                                    onClick={() => handleAddTag(tag.id)}
+                                    data-testid="addBtn"
+                                    className={styles.addBtn}
+                                >
                                     Add
                                 </button>
                             )}

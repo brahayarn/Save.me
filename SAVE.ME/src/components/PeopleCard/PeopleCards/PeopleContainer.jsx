@@ -63,7 +63,7 @@ const PeopleContainer = ({ userTags, filteredUsers = [], setFilteredUsers }) => 
                                     <div className={styles.userInfo}>
                                         <h3>{person.nickname || 'User'}</h3>
                                         <div className={styles.tags}>
-                                            <div className={styles.userTags}>
+                                            <div className={styles.userTags} data-testid="userTags">
                                                 {userTags.length > 0 ? (
                                                     userTags.map((tag) => (
                                                         <span key={tag} className={styles.blueTag}>
@@ -74,7 +74,7 @@ const PeopleContainer = ({ userTags, filteredUsers = [], setFilteredUsers }) => 
                                                     <span>No matching tags</span>
                                                 )}
                                             </div>
-                                            <div className={styles.missingTags}>
+                                            <div data-testid="missingTags" className={styles.missingTags}>
                                                 {missingTags.length > 0 ? (
                                                     missingTags.map((tag) => (
                                                         <span key={tag} className={styles.grayTag}>

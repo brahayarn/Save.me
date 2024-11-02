@@ -136,7 +136,7 @@ const ProfileCard = () => {
                 <div className={styles.userInfo}>
                     <img src={avatar} alt="User Avatar" className={styles.userImage} />
                     <h2>{profileData.nickname || 'User'}</h2>
-                    <button onClick={handleEditToggle} className={styles.editButton}>
+                    <button onClick={handleEditToggle} data-testid="edit-button" className={styles.editButton}>
                         {isEditing ? 'Save' : 'Edit'}
                     </button>
                 </div>
@@ -202,7 +202,7 @@ const ProfileCard = () => {
                         </div>
                         <div className={styles.formRow}>
                             <span className={styles.label}>Tags</span>
-                            <div className={`${styles.inputField} ${styles.tagscont}`}>
+                            <div data-testid="tags-container" className={`${styles.inputField} ${styles.tagscont}`}>
                                 {Array.isArray(profileData.tags) && profileData.tags.length > 0
                                     ? profileData.tags.join(', ')
                                     : 'No tags added.'}
@@ -214,10 +214,10 @@ const ProfileCard = () => {
                 <div className={styles.usermaillog}>
                     <div className={styles.formRow}>
                         <span className={styles.label}>My email Address</span>
-                        <img src={mailbox} alt="Mail Box" className={styles.mailimg} />
+                        <img src={mailbox} alt="Mail Box" data-testid="mail-image" className={styles.mailimg} />
                         <p>{profileData.email}</p>
                     </div>
-                    <button onClick={handleLogout} className={styles.logoutButton}>
+                    <button data-testid="logout-button" onClick={handleLogout} className={styles.logoutButton}>
                         Logout
                     </button>
                 </div>

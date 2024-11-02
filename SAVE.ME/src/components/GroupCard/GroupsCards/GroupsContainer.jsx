@@ -38,7 +38,7 @@ const GroupsContainer = ({ groups, userTags }) => {
                                 <div className={styles.userInfo}>
                                     <h3>{group.name || 'Group'}</h3>
                                     <div className={styles.tags}>
-                                        <div className={styles.userTags}>
+                                        <div className={styles.userTags} data-testid="userTags">
                                             {group.groupTags.length > 0 ? (
                                                 group.groupTags.map((tag) => (
                                                     <span key={tag} className={styles.blueTag}>
@@ -49,7 +49,7 @@ const GroupsContainer = ({ groups, userTags }) => {
                                                 <span>No matching tags</span>
                                             )}
                                         </div>
-                                        <div className={styles.missingTags}>
+                                        <div data-testid="missingTags" className={styles.missingTags}>
                                             {group.missingTags.length > 0 ? (
                                                 group.missingTags.map((tag) => (
                                                     <span key={tag} className={styles.grayTag}>

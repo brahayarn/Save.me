@@ -8,9 +8,9 @@ import styles from './ChatCard.css';
 
 function Chat() {
     return (
-        <div className={styles.chatContainer}>
+        <div data-testid="chatContainer" className={styles.chatContainer}>
             {/* Left Sidebar */}
-            <div className={styles.sidebar}>
+            <div data-testid="sidebar" className={styles.sidebar}>
                 <div className={styles.searchsection}>
                     <img src={search} alt="Search" />
                     <input type="text" placeholder="Search" />
@@ -83,7 +83,7 @@ function Chat() {
             </div>
 
             {/* Chat Area */}
-            <div className={styles.chatArea}>
+            <div data-testid="chatArea" className={styles.chatArea}>
                 <div className={styles.messages}>
                     <div className={styles.message}>
                         <p>spme text</p>
@@ -129,7 +129,7 @@ function Chat() {
             </div>
 
             {/* Profile Info */}
-            <div className={styles.profile}>
+            <div data-testid="profile" className={styles.profile}>
                 <div className={styles.profilePicture} />
                 <img src={avatar}></img>
                 <h3>user1</h3>
