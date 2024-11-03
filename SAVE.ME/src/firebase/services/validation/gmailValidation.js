@@ -6,9 +6,6 @@ const gmailRequirements = {
 };
 
 export const validateGmail = (email) => {
-    if (email.length < gmailRequirements.minLength || email.length > gmailRequirements.maxLength) {
-        return `Email має бути від ${gmailRequirements.minLength} до ${gmailRequirements.maxLength} символів.`;
-    }
     if (!gmailRequirements.domain.test(email)) {
         return 'Email повинен бути на домені gmail.com.';
     }

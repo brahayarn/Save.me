@@ -1,24 +1,24 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import backimg from '../../assets/images/backimg.svg';
 import textImage from '../../assets/images/textpg.png';
 import { logIn, signUp } from '../../firebase/services/authService.js';
-// import useAuth from '../../hooks/useAuth';
+import useAuth from '../../hooks/useAuth';
 import styles from './Auth.css';
 
 const Auth = () => {
-    // const { user } = useAuth();
+    const { user } = useAuth();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const navigate = useNavigate();
 
-    // useEffect(() => {
-    //     if (user) {
-    //         navigate('/profile');
-    //     }
-    // }, [user, navigate]);
+    useEffect(() => {
+        if (user) {
+            navigate('/profile');
+        }
+    }, [user, navigate]);
 
     const handleSignUp = async (event) => {
         event.preventDefault();
@@ -85,7 +85,7 @@ const Auth = () => {
                     </div>
 
                     <div className={styles.bottom__container}>
-                        <h2 className={styles.c2}>Уже зареэстровані?</h2>
+                        <h2 className={styles.c2}>Уже зареєстровані?</h2>
                         <button onClick={handleLogIn} className={styles.buttc}>
                             Ввійти
                         </button>

@@ -1,5 +1,4 @@
 import { collection, doc, getDoc, getDocs, setDoc, updateDoc } from 'firebase/firestore';
-import PropTypes from 'prop-types';
 import React, { useCallback, useEffect, useState } from 'react';
 
 import { auth, database } from '../../firebase/config';
@@ -46,6 +45,42 @@ const PeopleCard = () => {
         fetchUserTags();
     }, [userId, fetchUserTags]);
 
+    useEffect(() => {
+        const fetchFilteredUsers = async () => {
+            const usersCollectionReference = collection(database, 'users');
+            const usersSnap = await getDocs(usersCollectionReference);
+            const usersList = usersSnap.docs
+                .map((document_) => ({ id: document_.id, ...document_.data() }))
+                .filter((person) => person.id !== userId);
+
+            const updatedFilteredUsers = usersList
+                .map((person) => {
+                    const personTags = person.tags || [];
+                    const matchingTags = personTags.filter((tag) => userTags.includes(tag));
+                    const missingTags = personTags.filter((tag) => !userTags.includes(tag));
+
+                    return {
+                        ...person,
+                        matchingTags,
+                        missingTags,
+                    };
+                })
+                .sort((a, b) => {
+                    const aHasTags = a.matchingTags.length > 0;
+                    const bHasTags = b.matchingTags.length > 0;
+
+                    if (aHasTags && !bHasTags) return -1;
+                    if (!aHasTags && bHasTags) return 1;
+
+                    return b.matchingTags.length - a.matchingTags.length;
+                });
+
+            setFilteredUsers(updatedFilteredUsers);
+        };
+
+        fetchFilteredUsers();
+    }, [userTags, userId]);
+
     const handleAddTag = async (tagId) => {
         if (!userId) return;
 
@@ -64,8 +99,6 @@ const PeopleCard = () => {
             const updatedUserTags = [...userTags, tag.name];
             await updateDoc(doc(database, 'users', userId), { tags: updatedUserTags });
             setUserTags(updatedUserTags);
-
-            fetchTags();
         } catch (error) {
             console.error('Error adding tag:', error);
         }
@@ -89,8 +122,6 @@ const PeopleCard = () => {
             const updatedUserTags = userTags.filter((t) => t !== tag.name);
             await updateDoc(doc(database, 'users', userId), { tags: updatedUserTags });
             setUserTags(updatedUserTags);
-
-            fetchTags();
         } catch (error) {
             console.error('Error removing tag:', error);
         }
@@ -98,21 +129,10 @@ const PeopleCard = () => {
 
     return (
         <div className={styles.peopleContainer}>
-            <PeopleContainer
-                tags={tags}
-                userTags={userTags}
-                setFilteredUsers={setFilteredUsers} // Передаємо функцію для оновлення
-                filteredUsers={filteredUsers} // Передаємо відфільтрованих користувачів
-            />
+            <PeopleContainer userTags={userTags} setFilteredUsers={setFilteredUsers} filteredUsers={filteredUsers} />
             <TagSystem tags={tags} userTags={userTags} onAddTag={handleAddTag} onRemoveTag={handleRemoveTag} />
         </div>
     );
-};
-
-PeopleCard.propTypes = {
-    tags: PropTypes.array.isRequired,
-    userTags: PropTypes.array.isRequired,
-    setFilteredUsers: PropTypes.func.isRequired,
 };
 
 export default PeopleCard;

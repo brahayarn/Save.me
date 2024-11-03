@@ -7,25 +7,22 @@ import { auth, database } from '../../../firebase/config';
 import styles from './PeopleContainer.css';
 
 const PeopleContainer = ({ userTags, filteredUsers = [], setFilteredUsers }) => {
-    // Default to empty array
     const [users, setUsers] = useState([]);
     const user = auth.currentUser;
 
-    // Завантаження користувачів з Firestore
     useEffect(() => {
         const fetchUsers = async () => {
             const usersCollectionReference = collection(database, 'users');
             const usersSnap = await getDocs(usersCollectionReference);
             const usersList = usersSnap.docs
                 .map((document_) => ({ id: document_.id, ...document_.data() }))
-                .filter((person) => person.id !== user?.uid); // Виключити поточного користувача
+                .filter((person) => person.id !== user?.uid);
             setUsers(usersList);
         };
 
         fetchUsers();
     }, [user]);
 
-    // Фільтрація користувачів на основі тегів
     useEffect(() => {
         const updateFilteredUsers = users.map((person) => {
             const personTags = person.tags || [];
@@ -34,8 +31,8 @@ const PeopleContainer = ({ userTags, filteredUsers = [], setFilteredUsers }) => 
 
             return {
                 ...person,
-                userTags: matchingTags,
-                missingTags: missingTags,
+                matchingTags,
+                missingTags,
             };
         });
 
@@ -52,9 +49,7 @@ const PeopleContainer = ({ userTags, filteredUsers = [], setFilteredUsers }) => 
                     <p>No users found</p>
                 ) : (
                     filteredUsers.map((person) => {
-                        // Extract tags based on your data structure
-                        const userTags = person.tags || []; // Use the correct field for tags
-                        const missingTags = userTags.filter((tag) => !userTags.includes(tag)); // Determine missing tags
+                        const { matchingTags, missingTags } = person;
 
                         return (
                             <div key={person.id} className={styles.person}>
@@ -64,8 +59,8 @@ const PeopleContainer = ({ userTags, filteredUsers = [], setFilteredUsers }) => 
                                         <h3>{person.nickname || 'User'}</h3>
                                         <div className={styles.tags}>
                                             <div className={styles.userTags} data-testid="userTags">
-                                                {userTags.length > 0 ? (
-                                                    userTags.map((tag) => (
+                                                {matchingTags.length > 0 ? (
+                                                    matchingTags.map((tag) => (
                                                         <span key={tag} className={styles.blueTag}>
                                                             {tag}
                                                         </span>
