@@ -45,7 +45,7 @@ const PeopleContainer = ({ userTags, filteredUsers = [], setFilteredUsers }) => 
                 <p>Familiar for you peoples</p>
             </div>
             <div className={styles.peopleArea}>
-                {filteredUsers.length === 0 ? (
+                {filteredUsers?.length === 0 ? (
                     <p>No users found</p>
                 ) : (
                     filteredUsers.map((person) => {
@@ -59,7 +59,7 @@ const PeopleContainer = ({ userTags, filteredUsers = [], setFilteredUsers }) => 
                                         <h3>{person.nickname || 'User'}</h3>
                                         <div className={styles.tags}>
                                             <div className={styles.userTags} data-testid="userTags">
-                                                {matchingTags.length > 0 ? (
+                                                {matchingTags?.length > 0 ? (
                                                     matchingTags.map((tag) => (
                                                         <span key={tag} className={styles.blueTag}>
                                                             {tag}
@@ -70,7 +70,7 @@ const PeopleContainer = ({ userTags, filteredUsers = [], setFilteredUsers }) => 
                                                 )}
                                             </div>
                                             <div data-testid="missingTags" className={styles.missingTags}>
-                                                {missingTags.length > 0 ? (
+                                                {missingTags?.length > 0 ? (
                                                     missingTags.map((tag) => (
                                                         <span key={tag} className={styles.grayTag}>
                                                             {tag}
