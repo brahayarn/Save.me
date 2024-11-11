@@ -8,17 +8,28 @@ const GroupsContainer = ({ groups, userTags }) => {
     const [filteredGroups, setFilteredGroups] = useState([]);
 
     useEffect(() => {
-        const updateFilteredGroups = groups.map((group) => {
-            const groupTags = group.tags || [];
-            const matchingTags = groupTags.filter((tag) => userTags.includes(tag));
-            const missingTags = groupTags.filter((tag) => !userTags.includes(tag));
+        const updateFilteredGroups = groups
+            .map((group) => {
+                const groupTags = group.tags || [];
+                const matchingTags = groupTags.filter((tag) => userTags.includes(tag));
+                const missingTags = groupTags.filter((tag) => !userTags.includes(tag));
 
-            return {
-                ...group,
-                groupTags: matchingTags,
-                missingTags: missingTags,
-            };
-        });
+                return {
+                    ...group,
+                    matchingTags,
+                    missingTags,
+                };
+            })
+            .sort((a, b) => {
+                const aHasTags = a.matchingTags.length > 0;
+                const bHasTags = b.matchingTags.length > 0;
+
+                if (aHasTags && !bHasTags) return -1;
+                if (!aHasTags && bHasTags) return 1;
+
+                return b.matchingTags.length - a.matchingTags.length;
+            });
+
         setFilteredGroups(updateFilteredGroups);
     }, [groups, userTags]);
 
@@ -38,9 +49,9 @@ const GroupsContainer = ({ groups, userTags }) => {
                                 <div className={styles.userInfo}>
                                     <h3>{group.name || 'Group'}</h3>
                                     <div className={styles.tags}>
-                                        <div className={styles.userTags}>
-                                            {group.groupTags.length > 0 ? (
-                                                group.groupTags.map((tag) => (
+                                        <div className={styles.userTags} data-testid="userTags">
+                                            {group.matchingTags.length > 0 ? (
+                                                group.matchingTags.map((tag) => (
                                                     <span key={tag} className={styles.blueTag}>
                                                         {tag}
                                                     </span>
@@ -49,7 +60,7 @@ const GroupsContainer = ({ groups, userTags }) => {
                                                 <span>No matching tags</span>
                                             )}
                                         </div>
-                                        <div className={styles.missingTags}>
+                                        <div data-testid="missingTags" className={styles.missingTags}>
                                             {group.missingTags.length > 0 ? (
                                                 group.missingTags.map((tag) => (
                                                     <span key={tag} className={styles.grayTag}>
@@ -70,6 +81,7 @@ const GroupsContainer = ({ groups, userTags }) => {
         </div>
     );
 };
+
 GroupsContainer.propTypes = {
     groups: PropTypes.arrayOf(
         PropTypes.shape({

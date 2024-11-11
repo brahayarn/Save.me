@@ -85,7 +85,7 @@ const Auth = () => {
                     </div>
 
                     <div className={styles.bottom__container}>
-                        <h2 className={styles.c2}>Уже зареэстровані?</h2>
+                        <h2 className={styles.c2}>Уже зареєстровані?</h2>
                         <button onClick={handleLogIn} className={styles.buttc}>
                             Ввійти
                         </button>

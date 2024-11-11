@@ -103,3 +103,10 @@
 .c {
     font-weight: bolder;
 }
+
+@media (max-width: 1024px) {
+    .textim,
+    .textimage {
+        display: none;
+    }
+}
